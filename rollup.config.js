@@ -2,6 +2,7 @@ import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
+import terser from '@rollup/plugin-terser';
 
 export default defineConfig({
   input: "src/index.ts",
@@ -27,6 +28,7 @@ export default defineConfig({
     }),
     commonjs(),
     typescript(),
+    terser(),
   ],
   external: ["vue"],
 });

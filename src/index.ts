@@ -40,7 +40,7 @@ let isInitialized = false;
 export function setupVersionWatcher(options: VersionWatcherOptions = {}): void {
   const {
     enabled = true,
-    checkInterval = 30000,
+    checkInterval = 0,
     checkPath = `${window.location.origin}/`,
     silent = false,
     onUpdateDetected,

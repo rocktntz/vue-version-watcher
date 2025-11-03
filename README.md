@@ -17,16 +17,38 @@ npm install vue-version-watcher
 pnpm add vue-version-watcher
 ```
 
+
+
 ## 💡 使用
 ```ts
-import { setupVersionWatcher } from 'vue-version-watcher';
+import { createApp } from 'vue';
+import VueVersionWatcher from 'vue-version-watcher';
 
-setupVersionWatcher();
+const app = createApp(App);
+
+app.use(VueVersionWatcher, {
+  checkInterval: 30000,
+  silent: false,
+  onUpdateDetected: () => {
+    console.log('自定义更新逻辑');
+  }
+});
 ```
-
-在 `.env` 中启用：
-```bash
-VITE_VERSION_CHECK=true
+```ts
+export interface VersionWatcherOptions {
+  /** 检测开关，默认 true */
+  enabled?: boolean;
+  /** 检测间隔（毫秒），默认 0 不开启定时监测 */
+  checkInterval?: number;
+  /** 自定义检测路径，默认当前域名根路径 */
+  checkPath?: string;
+  /** 静默模式，不输出日志 */
+  silent?: boolean;
+  /** 自定义更新提示函数 */
+  onUpdateDetected?: () => void;
+  /** 忽略的路径模式（正则表达式） */
+  ignorePaths?: RegExp;
+}
 ```
 
 ## 🧠 原理
